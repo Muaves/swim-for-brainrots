@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swim for Brainrots | Roblox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0077ff;
+            --accent-cyan: #5bb8ff;
+            --bg-dark: #050505;
+            --nav-blur: rgba(5, 5, 5, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'DM Sans', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation --- */
+        .nav-flip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            width: 100%;
+            background: var(--nav-blur);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-flip__logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-flip__links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-flip__links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-flip__links a:hover { color: var(--accent-cyan); }
+
+        .nav-flip__cta {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-flip__cta:hover { background: #fff; color: var(--primary-blue); }
+
+        /* --- Split Hero --- */
+        .split-hero {
+            display: flex;
+            flex: 1;
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+
+        .content-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem 6rem;
+            background: #080808;
+        }
+
+        .visual-side {
+            flex: 1;
+            background: linear-gradient(135deg, #0a162e, #050505);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- Animations --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .game-card-mockup {
+            width: 70%;
+            aspect-ratio: 16/10;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* --- Typography --- */
+        .kicker {
+            font-family: 'Space Mono', monospace;
+            font-size: .7rem;
+            letter-spacing: .3em;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 6vw, 7rem);
+            color: #fff;
+            line-height: .88;
+            margin-bottom: 2rem;
+        }
+
+        .desc {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 450px;
+        }
+
+        .main-btn {
+            background: var(--primary-blue);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 18px 36px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 119, 255, 0.3);
+            text-align: center;
+        }
+
+        .main-btn:hover { transform: scale(1.05); background: #1a85ff; }
+
+        @media (max-width: 1024px) {
+            .split-hero { flex-direction: column; }
+            .content-side { padding: 4rem 2rem; text-align: center; align-items: center; }
+            .visual-side { padding: 5rem 2rem; }
+            .nav-flip__links { display: none; }
+            .nav-flip { padding: 1.5rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-flip">
+        <a href="#" class="nav-flip__logo">Swim For Brainrots</a>
+        <ul class="nav-flip__links">
+            <li><a href="#">Home</a></li>
+            <li><a href="https://discord.gg/8Ebx84GH" target="_blank">Discord</a></li>
+        </ul>
+        <a href="https://discord.gg/8Ebx84GH" target="_blank" class="nav-flip__cta">Join Community</a>
+    </nav>
+
+    <div class="split-hero">
+        <div class="content-side">
+            <p class="kicker">Live on Roblox</p>
+            <h1>SWIM FOR<br><span style="color:var(--primary-blue)">BRAINROTS</span></h1>
+            <p class="desc">Its the ultimate game were you need to swim to get brainrots and become rich. its owned by Zenox and Pengu and Muaves made it with love.</p>
+            <a href="https://discord.gg/YuxAbUYFPS" target="_blank" class="main-btn">JOIN THE DISCORD</a>
+        </div>
+
+        <div class="visual-side">
+            <div class="game-card-mockup">
+                <div style="height:12px; width:45%; background:var(--primary-blue); opacity: 0.6; border-radius:6px; margin-bottom: 25px;"></div>
+                <div style="height:8px; width:100%; background:rgba(255,255,255,.05); border-radius:4px; margin-bottom:12px"></div>
+                <div style="height:8px; width:85%; background:rgba(255,255,255,.05); border-radius:4px; margin-bottom:12px"></div>
+                <div style="height:8px; width:60%; background:rgba(255,255,255,.05); border-radius:4px; margin-bottom:40px"></div>
+                
+                <div style="display: flex; gap: 15px;">
+                    <div style="height:45px; width:45px; background:rgba(255,255,255,.05); border-radius:12px; border: 1px solid rgba(255,255,255,0.1);"></div>
+                    <div style="height:45px; width:45px; background:rgba(255,255,255,.05); border-radius:12px; border: 1px solid rgba(255,255,255,0.1);"></div>
+                    <div style="height:45px; width:45px; background:rgba(255,255,255,.05); border-radius:12px; border: 1px solid rgba(255,255,255,0.1);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
