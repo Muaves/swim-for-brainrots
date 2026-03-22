@@ -3,5 +3,5 @@
 <p>Swing for brainrots-web repo</p>
 
 Made by:
-[Muaves]:(https://muaves.com)
-[Pengu]:(https://vervex.hu)
+[Muaves](https://muaves.com)
+[Pengu](https://vervex.hu)
