@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Swim for Brainrots!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --rblx-dark: #1a1a2e;
+      --rblx-blue: #00a2ff;
+      --rblx-light-blue: #4fc3f7;
+      --rblx-green: #00c853;
+      --rblx-yellow: #ffd600;
+      --rblx-orange: #ff6d00;
+      --rblx-purple: #7c4dff;
+      --rblx-card: #1e2030;
+      --rblx-border: #3a3d5c;
+      --text-main: #e8eaf6;
+      --text-muted: #9fa8da
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--rblx-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh
+    }
+
+    ::-webkit-scrollbar {
+      width: 7px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--rblx-dark)
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--rblx-blue);
+      border-radius: 4px
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(26, 26, 46, .95);
+      backdrop-filter: blur(16px);
+      border-bottom: 2px solid var(--rblx-border);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem
+    }
+
+    .nav-brand {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--rblx-light-blue);
+      text-decoration: none
+    }
+
+    .nav-brand span {
+      color: var(--rblx-yellow)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: .85rem;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      transition: color .2s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--rblx-light-blue)
+    }
+
+    .nav-play {
+      background: var(--rblx-green);
+      color: #fff !important;
+      padding: 7px 18px;
+      border-radius: 8px;
+      font-weight: 800 !important;
+      box-shadow: 0 4px 0 #007a2e
+    }
+
+    .nav-play:hover {
+      transform: translateY(-2px)
+    }
+
+    .page-hero {
+      padding: 120px 2rem 60px;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(180deg, #0a0e1a 0%, #0d1b3e 60%, #0d1020 100%);
+      overflow: hidden
+    }
+
+    .page-hero-glow {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 350px;
+      background: radial-gradient(ellipse, rgba(0, 162, 255, .12) 0%, transparent 70%);
+      pointer-events: none
+    }
+
+    .page-hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      color: #fff;
+      margin-bottom: .8rem;
+      line-height: 1
+    }
+
+    .page-hero h1 span {
+      color: var(--rblx-light-blue)
+    }
+
+    .page-hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 600;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6
+    }
+
+    .glow-div {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rblx-blue), var(--rblx-light-blue), var(--rblx-blue), transparent);
+      opacity: .35
+    }
+
+    .section {
+      padding: 80px 2rem;
+      position: relative;
+      z-index: 2
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto
+    }
+
+    .section-inner-wide {
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .about-intro {
+      background: var(--rblx-card);
+      border: 1px solid var(--rblx-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden
+    }
+
+    .about-intro::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--rblx-blue), var(--rblx-light-blue), var(--rblx-purple));
+      border-radius: 24px 24px 0 0
+    }
+
+    .about-intro h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.8rem;
+      color: var(--rblx-yellow);
+      margin-bottom: 1rem
+    }
+
+    .about-intro p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.7;
+      margin-bottom: .8rem
+    }
+
+    .about-intro p:last-child {
+      margin-bottom: 0
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem
+    }
+
+    .info-card {
+      background: var(--rblx-card);
+      border: 1px solid var(--rblx-border);
+      border-radius: 18px;
+      padding: 1.75rem;
+      transition: border-color .2s, transform .2s
+    }
+
+    .info-card:hover {
+      border-color: var(--rblx-blue);
+      transform: translateY(-5px)
+    }
+
+    .info-card-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: .9rem
+    }
+
+    .info-card h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: .5rem
+    }
+
+    .info-card p {
+      color: var(--text-muted);
+      font-size: .9rem;
+      font-weight: 600;
+      line-height: 1.55
+    }
+
+    .creator-card {
+      background: var(--rblx-card);
+      border: 2px solid rgba(79, 195, 247, .25);
+      border-radius: 24px;
+      padding: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      position: relative;
+      overflow: hidden;
+      flex-wrap: wrap
+    }
+
+    .creator-card::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(79, 195, 247, .08) 0%, transparent 70%);
+      pointer-events: none
+    }
+
+    .creator-avatar {
+      flex-shrink: 0;
+      width: 90px;
+      height: 90px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #0077b6, #00b4d8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      border: 2px solid rgba(79, 195, 247, .3)
+    }
+
+    .creator-info h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: .4rem
+    }
+
+    .creator-info .handle {
+      color: var(--rblx-light-blue);
+      font-weight: 800;
+      font-size: .9rem;
+      margin-bottom: .8rem;
+      display: block;
+      letter-spacing: .5px
+    }
+
+    .creator-info p {
+      color: var(--text-muted);
+      font-size: .92rem;
+      font-weight: 600;
+      line-height: 1.55
+    }
+
+    .creator-links {
+      display: flex;
+      gap: .75rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap
+    }
+
+    .creator-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 8px;
+      padding: 7px 14px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: .82rem;
+      font-weight: 800;
+      transition: border-color .2s, color .2s
+    }
+
+    .creator-link:hover {
+      border-color: var(--rblx-light-blue);
+      color: var(--rblx-light-blue)
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem
+    }
+
+    .faq-item {
+      background: var(--rblx-card);
+      border: 1px solid var(--rblx-border);
+      border-radius: 16px;
+      overflow: hidden
+    }
+
+    .faq-q {
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      gap: 1rem;
+      transition: background .2s
+    }
+
+    .faq-q:hover {
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .faq-q h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.05rem;
+      color: #fff
+    }
+
+    .faq-arrow {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      transition: transform .3s;
+      color: var(--text-muted)
+    }
+
+    .faq-item.open .faq-arrow {
+      transform: rotate(180deg)
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, padding .35s ease
+    }
+
+    .faq-a-inner {
+      padding: 0 1.5rem 1.25rem;
+      color: var(--text-muted);
+      font-size: .92rem;
+      font-weight: 600;
+      line-height: 1.6
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 200px
+    }
+
+    .faq-item.open {
+      border-color: var(--rblx-blue)
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(79, 195, 247, .1);
+      border: 1px solid rgba(79, 195, 247, .3);
+      border-radius: 99px;
+      padding: 4px 14px;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--rblx-light-blue);
+      margin-bottom: 1.2rem
+    }
+
+    .section-heading {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      color: #fff;
+      margin-bottom: 2rem;
+      line-height: 1.1
+    }
+
+    .section-heading .ac {
+      color: var(--rblx-light-blue)
+    }
+
+    footer {
+      background: #07090f;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      padding: 3rem 2rem 2rem
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem
+    }
+
+    .footer-brand {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--rblx-light-blue);
+      margin-bottom: .5rem
+    }
+
+    .footer-brand span {
+      color: var(--rblx-yellow)
+    }
+
+    .footer-tagline {
+      color: var(--text-muted);
+      font-size: .85rem;
+      font-weight: 600;
+      max-width: 230px;
+      line-height: 1.5
+    }
+
+    .footer-col h5 {
+      font-size: .73rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: .9rem
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .55rem
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #6b7db3;
+      font-weight: 700;
+      font-size: .88rem;
+      transition: color .2s
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--rblx-light-blue)
+    }
+
+    .footer-div {
+      height: 1px;
+      background: rgba(255, 255, 255, .05);
+      margin-bottom: 2rem
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem
+    }
+
+    .footer-copy {
+      color: #3d4466;
+      font-size: .8rem;
+      font-weight: 600
+    }
+
+    .made-by {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      color: var(--rblx-light-blue)
+    }
+
+    .made-by span {
+      color: var(--rblx-yellow)
+    }
+
+    .rblx-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: .76rem;
+      font-weight: 800;
+      color: #6b7db3;
+      text-decoration: none;
+      transition: border-color .2s, color .2s
+    }
+
+    .rblx-badge:hover {
+      border-color: var(--rblx-green);
+      color: var(--rblx-green)
+    }
+
+    @media(max-width:768px) {
+      nav .nav-links li:not(:last-child) {
+        display: none
+      }
+
+      .creator-card {
+        flex-direction: column
+      }
+
+      .footer-top {
+        flex-direction: column
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise"></div>
+  <nav>
+    <a class="nav-brand" href="index.html">Swim for <span>Brainrots!</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="codes.html">Codes</a></li>
+      <li><a href="wiki.html">Wiki</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank" class="nav-play">▶
+          Play Now</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-glow"></div>
+    <h1>About <span>the Game</span></h1>
+    <p>Everything you need to know about Swim for Brainrots — what it is, who made it, and how to get the most out of
+      it.</p>
+  </div>
+  <div class="glow-div"></div>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="about-intro">
+        <h2>What is Swim for Brainrots?</h2>
+        <p>Swim through underwater levels</p>
+        <p>Collect Brainrots</p>
+        <p>Whether you're here to grind leaderboards or just goof around with friends, there's enough in the game to
+          keep things interesting for a long time.</p>
+      </div>
+      <!-- #endregion 
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="info-card-icon"></span>
+        <h3>Platform</h3>
+        <p>Available on Roblox — PC, Mobile, Tablet, and Console. Completely free to play.</p>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon"></span>
+        <h3>Game Mode</h3>
+        <p>Real-time multiplayer game.</p>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon"></span>
+        <h3>Egg Hatching</h3>
+        <p>Spend your in-game currency on eggs to unlock rare companions and pets with different abilities.</p>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon"></span>
+        <h3>Rebirth System</h3>
+        <p>Reset your progress at a threshold to earn permanent power multipliers that stack across all future runs.</p>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon"></span>
+        <h3>Multiple Worlds</h3>
+        <p>Unlock new worlds as you progress. Each world brings new race environments and unique challenges.</p>
+      </div>
+      <div class="info-card">
+        <span class="info-card-icon"></span>
+        <h3>Game Codes</h3>
+        <p>Redeem codes using the ABX button for free sprints, luck potions, and other boosts. Check the Codes page.</p>
+      </div>
+    </div>
+-->
+      <div style="margin-bottom:2.5rem">
+        <div class="section-tag">The page Developer</div>
+        <h2 class="section-heading">Made by <span class="ac">Muaves</span></h2>
+        <div class="creator-card">
+          <div class="creator-avatar"><img src="https://uploadzoo.muaves.com/muavesbust.png" alt="" width="90px"
+              height="80px"></div>
+          <div class="creator-info">
+            <h3>Muaves</h3>
+            <span class="handle">Game Developer · Roblox Creator</span>
+            <p>The developer behind Swim for Brainrots. Building fun, replayable Roblox experiences with consistent
+              updates and a growing community. This site is the official hub for game info, codes, and the wiki.</p>
+            <div class="creator-links">
+              <a href="https://muaves.com" target="_blank" class="creator-link">🌐 muaves.com</a>
+              <a href="https://dc.muaves.com" target="_blank" class="creator-link">Discord page</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-heading">Common <span class="ac">Questions</span></h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <h4>Is the game free to play?</h4>
+              <span class="faq-arrow">▾</span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes — completely free on Roblox. There are optional premium perks (like +20%
+                power boost) but nothing is paywalled. You can reach the top of the leaderboard without spending a
+                Robux.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <h4>What platforms can I play on?</h4>
+              <span class="faq-arrow">▾</span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">Swim for Brainrots runs on any platform that supports Roblox — PC, Mac, Mobile
+                (iOS and Android), Tablet, and Xbox. As long as you have Roblox, you're good.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <h4>How do I redeem codes?</h4>
+              <span class="faq-arrow">▾</span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">There are currently 0 codes working.</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <h4>Why should I play?</h4>
+              <span class="faq-arrow">▾</span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">You should play because we want to:).</div>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <h4>How often does the game get updated?</h4>
+              <span class="faq-arrow">▾</span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">The developer pushes updates regularly — new worlds, egg types, events, and
+                balance changes. Follow the Roblox page or keep an eye on this site for the latest news and code drops.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">Swim for <span>Brainrots!</span></div>
+          <p class="footer-tagline">The wildest swimming game on Roblox. Dive deep. Hatch everything.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Pages</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="codes.html">Codes</a></li>
+            <li><a href="wiki.html">Wiki</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Links</h5>
+          <ul>
+            <li><a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank">Roblox Page</a>
+            </li>
+            <li><a href="https://muaves.com" target="_blank">muaves.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Swim for Brainrots. Not affiliated with Roblox Corporation.</span>
+        <span class="made-by">Page made by <span>Muaves</span> 🌊</span>
+        <a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank" class="rblx-badge">▶
+          Play Free on Roblox</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(el) {
+      const item = el.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+</body>
+
+</html>
