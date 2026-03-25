@@ -1,231 +1,1261 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swim for Brainrots | Roblox</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-blue: #0077ff;
-            --accent-cyan: #5bb8ff;
-            --bg-dark: #050505;
-            --nav-blur: rgba(5, 5, 5, 0.8);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swim for Brainrots!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --rblx-dark: #1a1a2e;
+      --rblx-blue: #00a2ff;
+      --rblx-light-blue: #4fc3f7;
+      --rblx-green: #00c853;
+      --rblx-yellow: #ffd600;
+      --rblx-orange: #ff6d00;
+      --rblx-purple: #7c4dff;
+      --rblx-card: #1e2030;
+      --rblx-border: #3a3d5c;
+      --text-main: #e8eaf6;
+      --text-muted: #9fa8da
+    }
 
-        body {
-            background-color: var(--bg-dark);
-            font-family: 'DM Sans', sans-serif;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
+    html {
+      scroll-behavior: smooth
+    }
 
-        /* --- Navigation --- */
-        .nav-flip {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 4rem;
-            width: 100%;
-            background: var(--nav-blur);
-            backdrop-filter: blur(12px);
-            position: fixed;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--rblx-dark);
+      color: var(--text-main);
+      overflow-x: hidden
+    }
 
-        .nav-flip__logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
+    ::-webkit-scrollbar {
+      width: 7px
+    }
 
-        .nav-flip__links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
+    ::-webkit-scrollbar-track {
+      background: var(--rblx-dark)
+    }
 
-        .nav-flip__links a {
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
+    ::-webkit-scrollbar-thumb {
+      background: var(--rblx-blue);
+      border-radius: 4px
+    }
 
-        .nav-flip__links a:hover { color: var(--accent-cyan); }
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px
+    }
 
-        .nav-flip__cta {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 10px 20px;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(26, 26, 46, .9);
+      backdrop-filter: blur(16px);
+      border-bottom: 2px solid var(--rblx-border);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem
+    }
 
-        .nav-flip__cta:hover { background: #fff; color: var(--primary-blue); }
+    .nav-brand {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--rblx-light-blue);
+      text-decoration: none;
+      text-shadow: 0 0 20px rgba(79, 195, 247, .4)
+    }
 
-        /* --- Split Hero --- */
-        .split-hero {
-            display: flex;
-            flex: 1;
-            margin-top: 70px;
-            min-height: calc(100vh - 70px);
-        }
+    .nav-brand span {
+      color: var(--rblx-yellow)
+    }
 
-        .content-side {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 5rem 6rem;
-            background: #080808;
-        }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center
+    }
 
-        .visual-side {
-            flex: 1;
-            background: linear-gradient(135deg, #0a162e, #050505);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: .85rem;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      transition: color .2s
+    }
 
-        /* --- Animations --- */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--rblx-light-blue)
+    }
 
-        .game-card-mockup {
-            width: 70%;
-            aspect-ratio: 16/10;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            padding: 2.5rem;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-            animation: float 6s ease-in-out infinite;
-        }
+    .nav-play {
+      background: var(--rblx-green);
+      color: #fff !important;
+      padding: 7px 18px;
+      border-radius: 8px;
+      font-weight: 800 !important;
+      box-shadow: 0 4px 0 #007a2e, 0 0 12px rgba(0, 200, 83, .3);
+      transition: transform .1s, box-shadow .1s !important
+    }
 
-        /* --- Typography --- */
-        .kicker {
-            font-family: 'Space Mono', monospace;
-            font-size: .7rem;
-            letter-spacing: .3em;
-            color: var(--accent-cyan);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-        }
+    .nav-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #007a2e, 0 0 20px rgba(0, 200, 83, .5) !important
+    }
 
-        h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(4rem, 6vw, 7rem);
-            color: #fff;
-            line-height: .88;
-            margin-bottom: 2rem;
-        }
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 64px
+    }
 
-        .desc {
-            font-size: 1.05rem;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 3rem;
-            line-height: 1.7;
-            max-width: 450px;
-        }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #0a0e1a 0%, #0d1b3e 30%, #0a2a5c 55%, #023e8a 75%, #0077b6 100%)
+    }
 
-        .main-btn {
-            background: var(--primary-blue);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 18px 36px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 119, 255, 0.3);
-            text-align: center;
-        }
+    .bubbles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden
+    }
 
-        .main-btn:hover { transform: scale(1.05); background: #1a85ff; }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, .6), rgba(79, 195, 247, .1));
+      border: 1px solid rgba(255, 255, 255, .2);
+      animation: floatUp linear infinite
+    }
 
-        @media (max-width: 1024px) {
-            .split-hero { flex-direction: column; }
-            .content-side { padding: 4rem 2rem; text-align: center; align-items: center; }
-            .visual-side { padding: 5rem 2rem; }
-            .nav-flip__links { display: none; }
-            .nav-flip { padding: 1.5rem 2rem; }
-        }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(110vh) scale(1);
+        opacity: 0
+      }
 
-        .footer {
-            text-align: center;
-            padding: 1rem 0;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            margin-top: auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(0, 0, 0, 0.1);
-        }
-    </style>
+      10% {
+        opacity: .7
+      }
+
+      90% {
+        opacity: .3
+      }
+
+      100% {
+        transform: translateY(-10vh) scale(.8);
+        opacity: 0
+      }
+    }
+
+    .wl {
+      position: absolute;
+      bottom: 0;
+      left: -10%;
+      width: 120%;
+      pointer-events: none
+    }
+
+    .wl svg {
+      width: 100%
+    }
+
+    .w1 {
+      animation: wM 7s ease-in-out infinite alternate;
+      opacity: .5
+    }
+
+    .w2 {
+      animation: wM 5s ease-in-out infinite alternate-reverse;
+      opacity: .35;
+      bottom: -10px
+    }
+
+    .w3 {
+      animation: wM 9s ease-in-out infinite alternate;
+      opacity: .2;
+      bottom: -20px
+    }
+
+    @keyframes wM {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-40px)
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      padding: 2rem;
+      max-width: 900px
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0, 162, 255, .15);
+      border: 1px solid var(--rblx-blue);
+      border-radius: 99px;
+      padding: 6px 16px;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--rblx-light-blue);
+      margin-bottom: 1.5rem;
+      animation: pglow 2.5s ease-in-out infinite
+    }
+
+    
+
+    .hero-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #fff 0%, #b3e5fc 40%, #4fc3f7 70%, #ffd600 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 4px 24px rgba(0, 162, 255, .4));
+      animation: tF 3s ease-in-out infinite
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: #90caf9;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.55
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, .35);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: sH 1.8s ease-in-out infinite
+    }
+
+    @keyframes sH {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0)
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(6px)
+      }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--rblx-green);
+      color: #fff;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      padding: 13px 34px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 6px 0 #007a2e, 0 0 28px rgba(0, 200, 83, .35);
+      transition: transform .12s, box-shadow .12s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .25), transparent);
+      transform: skewX(-20deg);
+      animation: shine 3s ease-in-out infinite
+    }
+
+    @keyframes shine {
+      0% {
+        left: -100%
+      }
+
+      40%,
+      100% {
+        left: 160%
+      }
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #007a2e, 0 0 40px rgba(0, 200, 83, .55)
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #007a2e
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, .08);
+      color: var(--text-main);
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      padding: 13px 34px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 2px solid rgba(255, 255, 255, .2);
+      transition: background .2s, border-color .2s, transform .12s, color .2s
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, .13);
+      border-color: var(--rblx-light-blue);
+      transform: translateY(-2px);
+      color: var(--rblx-light-blue)
+    }
+
+    .ticker-wrap {
+      overflow: hidden;
+      background: var(--rblx-green);
+      padding: 10px 0;
+      position: relative;
+      z-index: 3
+    }
+
+    .ticker-track {
+      display: flex;
+      animation: tR 22s linear infinite;
+      width: max-content
+    }
+
+    .ticker-track span {
+      white-space: nowrap;
+      font-weight: 800;
+      font-size: .78rem;
+      letter-spacing: .5px;
+      color: #fff;
+      padding: 0 2.5rem;
+      opacity: .9
+    }
+
+    @keyframes tR {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    .glow-div {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rblx-blue), var(--rblx-light-blue), var(--rblx-blue), transparent);
+      opacity: .35
+    }
+
+    .section {
+      padding: 90px 2rem;
+      position: relative;
+      z-index: 2
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 55px
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(79, 195, 247, .1);
+      border: 1px solid rgba(79, 195, 247, .3);
+      border-radius: 99px;
+      padding: 4px 14px;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--rblx-light-blue);
+      margin-bottom: .9rem
+    }
+
+    .section-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.9rem, 5vw, 3.2rem);
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: .9rem
+    }
+
+    .ac {
+      color: var(--rblx-light-blue)
+    }
+
+    .ay {
+      color: var(--rblx-yellow)
+    }
+
+    .section-desc {
+      max-width: 520px;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.6
+    }
+
+    .about-section {
+      background: linear-gradient(180deg, var(--rblx-dark) 0%, #111428 100%)
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center
+    }
+
+    .about-text h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2rem;
+      color: var(--rblx-yellow);
+      margin-bottom: .9rem
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.7;
+      margin-bottom: .9rem
+    }
+
+    .stat-pills {
+      display: flex;
+      gap: .9rem;
+      flex-wrap: wrap;
+      margin-top: 1.8rem
+    }
+
+    .stat-pill {
+      background: var(--rblx-card);
+      border: 1px solid var(--rblx-border);
+      border-radius: 12px;
+      padding: 13px 18px;
+      text-align: center;
+      min-width: 110px;
+      transition: border-color .2s, transform .2s
+    }
+
+    .stat-pill:hover {
+      border-color: var(--rblx-blue);
+      transform: translateY(-4px)
+    }
+
+    .stat-pill .val {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: var(--rblx-light-blue);
+      display: block;
+      line-height: 1
+    }
+
+    .stat-pill .lbl {
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--text-muted);
+      font-weight: 800;
+      display: block;
+      margin-top: 4px
+    }
+
+    .about-visual {
+      position: relative;
+      height: 360px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #023e8a, #0077b6, #00b4d8);
+      border: 2px solid rgba(79, 195, 247, .25);
+      box-shadow: 0 20px 60px rgba(0, 119, 182, .3)
+    }
+
+    .av-over {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 168, 255, .25) 0%, rgba(0, 77, 180, .6) 60%, rgba(2, 48, 110, .9) 100%)
+    }
+
+    .fish-e {
+      position: absolute;
+      font-size: 2.5rem;
+      animation: swimF linear infinite;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .3))
+    }
+
+    @keyframes swimF {
+      0% {
+        transform: translateX(-80px) translateY(0) scaleX(1)
+      }
+
+      48% {
+        transform: translateX(calc(100% + 80px)) translateY(-20px) scaleX(1)
+      }
+
+      49% {
+        transform: translateX(calc(100% + 80px)) translateY(-20px) scaleX(-1)
+      }
+
+      98% {
+        transform: translateX(-80px) translateY(0) scaleX(-1)
+      }
+
+      99%,
+      100% {
+        transform: translateX(-80px) translateY(0) scaleX(1)
+      }
+    }
+
+    .char-e {
+      position: absolute;
+      font-size: 3.5rem;
+      animation: swimC linear infinite;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .5))
+    }
+
+    @keyframes swimC {
+      0% {
+        transform: translateX(-100px) translateY(0)
+      }
+
+      50% {
+        transform: translateX(calc(100% + 60px)) translateY(15px)
+      }
+
+      100% {
+        transform: translateX(-100px) translateY(0)
+      }
+    }
+
+    .av-bot {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+      background: linear-gradient(0deg, rgba(2, 48, 110, .95) 0%, transparent 100%)
+    }
+
+    .av-bot h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.3rem;
+      color: #fff
+    }
+
+    .av-bot p {
+      font-size: .83rem;
+      color: #90caf9;
+      font-weight: 600
+    }
+
+    .how-section {
+      background: #0d1020
+    }
+
+    .steps-cont {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem
+    }
+
+    .step-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      background: var(--rblx-card);
+      border: 1px solid var(--rblx-border);
+      border-radius: 18px;
+      padding: 1.75rem;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      cursor: default
+    }
+
+    .step-card:hover {
+      border-color: var(--rblx-blue);
+      transform: translateX(8px);
+      box-shadow: -4px 0 0 var(--rblx-blue), 0 12px 40px rgba(0, 162, 255, .15)
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: #fff
+    }
+
+    .snb {
+      background: linear-gradient(135deg, #0077b6, #00b4d8)
+    }
+
+    .sng {
+      background: linear-gradient(135deg, #00c853, #00e676)
+    }
+
+    .sny {
+      background: linear-gradient(135deg, #ffd600, #ffab00)
+    }
+
+    .snp {
+      background: linear-gradient(135deg, #7c4dff, #b388ff)
+    }
+
+    .sno {
+      background: linear-gradient(135deg, #ff6d00, #ff9100)
+    }
+
+    .step-body h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: .4rem
+    }
+
+    .step-body p {
+      color: var(--text-muted);
+      font-size: .92rem;
+      font-weight: 600;
+      line-height: 1.55
+    }
+
+    .step-icon {
+      font-size: 1.8rem;
+      margin-left: auto;
+      flex-shrink: 0;
+      opacity: .85
+    }
+
+    .codes-preview-section {
+      background: var(--rblx-dark)
+    }
+
+    .codes-mini-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem
+    }
+
+    .code-mini-card {
+      background: var(--rblx-card);
+      border: 1px solid var(--rblx-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color .2s, transform .2s
+    }
+
+    .code-mini-card:hover {
+      border-color: var(--rblx-green);
+      transform: translateY(-4px)
+    }
+
+    .code-badge {
+      background: rgba(0, 200, 83, .1);
+      border: 1px solid rgba(0, 200, 83, .3);
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      color: var(--rblx-green);
+      white-space: nowrap
+    }
+
+    .code-meta .reward {
+      font-weight: 800;
+      font-size: .9rem;
+      color: #fff;
+      display: block
+    }
+
+    .code-meta .status {
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--rblx-green)
+    }
+
+    .codes-cta {
+      text-align: center;
+      margin-top: 2.5rem
+    }
+
+    .cta-section {
+      padding: 110px 2rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      background: linear-gradient(180deg, #0d1020 0%, #020d1f 100%)
+    }
+
+    .cta-bg-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(0, 162, 255, .1) 0%, transparent 70%);
+      pointer-events: none
+    }
+
+    .cta-card {
+      position: relative;
+      z-index: 2;
+      max-width: 660px;
+      margin: 0 auto;
+      background: var(--rblx-card);
+      border: 1px solid rgba(79, 195, 247, .25);
+      border-radius: 28px;
+      padding: 56px 44px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .05)
+    }
+
+    .cta-card h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      color: #fff;
+      margin-bottom: .9rem;
+      line-height: 1.15
+    }
+
+    .cta-card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 2.2rem;
+      line-height: 1.6
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .online-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 200, 83, .1);
+      border: 1px solid rgba(0, 200, 83, .3);
+      border-radius: 99px;
+      padding: 5px 13px;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .5px;
+      color: var(--rblx-green);
+      margin-bottom: 1.5rem
+    }
+
+    .online-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--rblx-green);
+      border-radius: 50%;
+      animation: blink 1.4s ease-in-out infinite
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .2
+      }
+    }
+
+    footer {
+      background: #07090f;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      padding: 3rem 2rem 2rem
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem
+    }
+
+    .footer-brand {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--rblx-light-blue);
+      margin-bottom: .5rem
+    }
+
+    .footer-brand span {
+      color: var(--rblx-yellow)
+    }
+
+    .footer-tagline {
+      color: var(--text-muted);
+      font-size: .85rem;
+      font-weight: 600;
+      max-width: 230px;
+      line-height: 1.5
+    }
+
+    .footer-col h5 {
+      font-size: .73rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: .9rem
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .55rem
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #6b7db3;
+      font-weight: 700;
+      font-size: .88rem;
+      transition: color .2s
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--rblx-light-blue)
+    }
+
+    .footer-div {
+      height: 1px;
+      background: rgba(255, 255, 255, .05);
+      margin-bottom: 2rem
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem
+    }
+
+    .footer-copy {
+      color: #3d4466;
+      font-size: .8rem;
+      font-weight: 600
+    }
+
+    .made-by {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      color: var(--rblx-light-blue)
+    }
+
+    .made-by span {
+      color: var(--rblx-yellow)
+    }
+
+    .rblx-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: .76rem;
+      font-weight: 800;
+      color: #6b7db3;
+      text-decoration: none;
+      transition: border-color .2s, color .2s
+    }
+
+    .rblx-badge:hover {
+      border-color: var(--rblx-green);
+      color: var(--rblx-green)
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .d1 {
+      transition-delay: .1s
+    }
+
+    .d2 {
+      transition-delay: .2s
+    }
+
+    .d3 {
+      transition-delay: .3s
+    }
+
+    .d4 {
+      transition-delay: .4s
+    }
+
+    @media(max-width:768px) {
+      .about-grid {
+        grid-template-columns: 1fr
+      }
+
+      .about-visual {
+        height: 260px
+      }
+
+      nav .nav-links li:not(:last-child) {
+        display: none
+      }
+
+      .cta-card {
+        padding: 36px 22px
+      }
+
+      .footer-top {
+        flex-direction: column
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="noise"></div>
+  <nav>
+    <a class="nav-brand" href="index.html">Swim for <span>Brainrots!</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="codes.html">Codes</a></li>
+      <li><a href="wiki.html">Wiki</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank" class="nav-play">▶
+          Play Now</a></li>
+    </ul>
+  </nav>
 
-    <nav class="nav-flip">
-        <a href="#" class="nav-flip__logo">Swim For Brainrots</a>
-        <ul class="nav-flip__links">
-            <li><a href="#">Home</a></li>
-            <li><a href="https://discord.gg/8Ebx84GH" target="_blank">Discord</a></li>
-        </ul>
-        <a href="https://discord.gg/8Ebx84GH" target="_blank" class="nav-flip__cta">Join Community</a>
-    </nav>
-
-    <div class="split-hero">
-        <div class="content-side">
-            <p class="kicker">Live on Roblox</p>
-            <h1>SWIM FOR<br><span style="color:var(--primary-blue)">BRAINROTS</span></h1>
-            <p class="desc">Its the ultimate game were you need to swim to get brainrots and become rich. its owned by Zenox and the dev is Penguin made it with love.</p>
-            <a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank" class="main-btn">PLAY THE GAME</a>
-        </div>
-
-        <div class="visual-side">
-            <div class="game-card-mockup">
-                <div style="height:12px; width:45%; background:var(--primary-blue); opacity: 0.6; border-radius:6px; margin-bottom: 25px;"></div>
-                <div style="height:8px; width:100%; background:rgba(255,255,255,.05); border-radius:4px; margin-bottom:12px"></div>
-                <div style="height:8px; width:85%; background:rgba(255,255,255,.05); border-radius:4px; margin-bottom:12px"></div>
-                <div style="height:8px; width:60%; background:rgba(255,255,255,.05); border-radius:4px; margin-bottom:40px"></div>
-                
-                <div style="display: flex; gap: 15px;">
-                    <div style="height:45px; width:45px; background:rgba(255,255,255,.05); border-radius:12px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                    <div style="height:45px; width:45px; background:rgba(255,255,255,.05); border-radius:12px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                    <div style="height:45px; width:45px; background:rgba(255,255,255,.05); border-radius:12px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                </div>
-            </div>
-        </div>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="bubbles" id="bc"></div>
+    <div class="wl w3"><svg viewBox="0 0 1440 80" preserveAspectRatio="none" fill="rgba(0,119,182,0.15)">
+        <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" />
+      </svg></div>
+    <div class="wl w2"><svg viewBox="0 0 1440 80" preserveAspectRatio="none" fill="rgba(0,119,182,0.25)">
+        <path d="M0,50 C200,10 400,70 600,50 C800,30 1000,70 1200,50 C1320,38 1380,45 1440,50 L1440,80 L0,80 Z" />
+      </svg></div>
+    <div class="wl w1"><svg viewBox="0 0 1440 100" preserveAspectRatio="none" fill="rgba(0,77,180,0.35)">
+        <path d="M0,60 C180,20 360,80 540,60 C720,40 900,80 1080,60 C1260,40 1380,65 1440,60 L1440,100 L0,100 Z" />
+      </svg></div>
+    <div class="hero-content">
+      <div class="hero-badge"> Now Playable on Roblox</div>
+      <h1 class="hero-title">Swim for Brainrots!</h1>
+      <p class="hero-sub">Ride your brainrot, race your friends, hatch eggs, rebirth for insane power, and explore wild
+        new worlds underwater.</p>
+      <div class="hero-btns">
+        <a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank" class="btn-primary">▶
+          Play on Roblox</a>
+        <a href="#about" class="btn-secondary">Learn More</a>
+      </div>
     </div>
+    <div class="scroll-hint">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round">
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </svg>
+      scroll down
+    </div>
+  </section>
 
-    <footer class="footer">© 2026 Penguin. All rights reserved. This site is copyrighted by Penguin.</footer>
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span> RIDE YOUR BRAINROT</span><span> RACE YOUR FRIENDS</span><span> REBIRTH FOR POWER</span><span> HATCH
+        EGGS</span><span> EXPLORE NEW WORLDS</span><span> CLIMB THE LEADERBOARD</span><span>⚡ USE CODES FOR
+        BOOSTS</span><span>UNLOCK RARE COMPANIONS</span>
+      <span> RIDE YOUR BRAINROT</span><span> RACE YOUR FRIENDS</span><span>REBIRTH FOR POWER</span><span> HATCH
+        EGGS</span><span> EXPLORE NEW WORLDS</span><span>CLIMB THE LEADERBOARD</span><span> USE CODES FOR
+        BOOSTS</span><span> UNLOCK RARE COMPANIONS</span>
+    </div>
+  </div>
+  <div class="glow-div"></div>
 
+  <section class="section about-section" id="about">
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <div class="section-tag">About the Game</div>
+        <h3>Swim. Steal. Repeat.</h3>
+        <p>Swim for Brainrots is a Roblox experience where you Swim for better and better brainrots.</p>
+        <p>Swim for more valuable brainrots! Premium players get +20% power.</p>
+        <div class="stat-pills">
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  <div class="glow-div"></div>
+
+  <section class="section how-section" id="how">
+    <div class="section-header">
+      <div class="section-tag">Gameplay</div>
+      <h2 class="section-title">How to <span class="ac">Play</span></h2>
+      <p class="section-desc">Jump in blind or read the steps. Either way here's the loop that'll get you winning fast.
+      </p>
+    </div>
+    <div class="steps-cont">
+      <div class="step-card fade-in">
+        <div class="step-num snb">1</div>
+        <div class="step-body">
+          <h4>Join the Game</h4>
+          <p>Open Roblox and hit the Play Now button at the top. It's free. Jump into a server and you're in.</p>
+        </div>
+        <div class="step-icon"></div>
+      </div>
+      <div class="step-card fade-in d1">
+        <div class="step-num sng">2</div>
+        <div class="step-body">
+          <h4>Swim</h4>
+          <p>Swim underwater but look at your oxigen level!</p>
+        </div>
+        <div class="step-icon"></div>
+      </div>
+      <div class="step-card fade-in d2">
+        <div class="step-num sny">3</div>
+        <div class="step-body">
+          <h4>Pick up Brainrots</h4>
+          <p>Collect brainrots to increase your score and unlock new abilities.</p>
+        </div>
+        <div class="step-icon"></div>
+      </div>
+    </div>
+  </section>
+  <div class="glow-div"></div>
+ <!-- #region 
+  <section class="section codes-preview-section" id="codes-preview">
+    <div class="section-header">
+      <div class="section-tag">Free Rewards</div>
+      <h2 class="section-title">Active <span class="ac">Codes</span></h2>
+      <p class="section-desc">Redeem these in-game using the ABX button. Codes expire — grab them while they're live.
+      </p>
+    </div>
+   
+    <div class="codes-mini-grid">
+      <div class="code-mini-card fade-in">
+        <div class="code-badge" style="text-decoration: line-through;">Welcome</div>
+        <div class="code-meta"><span class="reward">Free Reward</span><span class="status">✓ Active</span></div>
+      </div>
+      <div class="code-mini-card fade-in d1">
+        <div class="code-badge">Season</div>
+        <div class="code-meta"><span class="reward">1× Sprint</span><span class="status">✓ Active</span></div>
+      </div>
+      <div class="code-mini-card fade-in d2">
+        <div class="code-badge">Trade</div>
+        <div class="code-meta"><span class="reward">Free Reward</span><span class="status">✓ Active</span></div>
+      </div>
+      <div class="code-mini-card fade-in d3">
+        <div class="code-badge">UpData</div>
+        <div class="code-meta"><span class="reward">1× Luck Potion</span><span class="status">✓ Active</span></div>
+      </div>
+    </div>
+    <div class="codes-cta"><a href="codes.html" class="btn-secondary" style="font-size:1rem">See Full Codes Page →</a>
+    </div>
+  </section>
+-->
+  <section class="cta-section">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-card fade-in">
+      <div class="online-pill">
+        <div class="online-dot"></div> Servers Online Now
+      </div>
+      <h2>Ready to Dive In? </h2>
+      <p>Jump into Swim for Brainrots right now. Race, hatch, rebirth, and climb to the top of the leaderboard.</p>
+      <div class="cta-btns">
+        <a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank" class="btn-primary">▶
+          Play Free on Roblox</a>
+        <a href="https://muaves.com" target="_blank" class="btn-secondary">🌐 muaves.com</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">Swim for <span>Brainrots!</span></div>
+          <p class="footer-tagline">The wildest swimming game on Roblox. Dive deep. Hatch everything. Never stop
+            rebirting.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Pages</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="codes.html">Codes</a></li>
+            <li><a href="wiki.html">Wiki</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Links</h5>
+          <ul>
+            <li><a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank">Roblox Page</a>
+            </li>
+            <li><a href="https://muaves.com" target="_blank">muaves.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-div"></div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Swim for Brainrots. Not affiliated with Roblox Corporation.</span>
+        <span class="made-by">Page made by <span>Muaves</span> </span>
+        <a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank" class="rblx-badge">▶
+          Play Free on Roblox</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const c = document.getElementById('bc');
+      for (let i = 0; i < 28; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const s = Math.random() * 18 + 4;
+        b.style.cssText = `width:${s}px;height:${s}px;left:${Math.random() * 100}%;bottom:-${s}px;animation-duration:${Math.random() * 12 + 7}s;animation-delay:${Math.random() * 10}s`;
+        c.appendChild(b);
+      }
+    })();
+    (function () {
+      const obs = new IntersectionObserver(en => { en.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+    })();
+    (function () {
+      const nav = document.querySelector('nav');
+      window.addEventListener('scroll', () => {
+        nav.style.background = window.scrollY > 60 ? 'rgba(26,26,46,.97)' : 'rgba(26,26,46,.9)';
+      }, { passive: true });
+    })();
+    (function () {
+      document.querySelectorAll('a[href^="#"]').forEach(l => {
+        l.addEventListener('click', e => {
+          const t = document.getElementById(l.getAttribute('href').slice(1));
+          if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 64, behavior: 'smooth' }) }
+        });
+      });
+    })();
+    (function () {
+      const h = document.querySelector('.hero-content');
+      window.addEventListener('mousemove', e => {
+        const dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+        const dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+        h.style.transform = `translate(${dx * 7}px,${dy * 4}px)`;
+      }, { passive: true });
+    })();
+  </script>
 </body>
+
 </html>

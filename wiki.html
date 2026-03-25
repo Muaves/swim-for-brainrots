@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki — Swim for Brainrots!</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --rblx-dark: #1a1a2e;
+            --rblx-blue: #00a2ff;
+            --rblx-light-blue: #4fc3f7;
+            --rblx-green: #00c853;
+            --rblx-yellow: #ffd600;
+            --rblx-orange: #ff6d00;
+            --rblx-purple: #7c4dff;
+            --rblx-card: #1e2030;
+            --rblx-border: #3a3d5c;
+            --text-main: #e8eaf6;
+            --text-muted: #9fa8da
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--rblx-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--rblx-dark)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--rblx-blue);
+            border-radius: 4px
+        }
+
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: .025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 128px
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26, 26, 46, .95);
+            backdrop-filter: blur(16px);
+            border-bottom: 2px solid var(--rblx-border);
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem
+        }
+
+        .nav-brand {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.4rem;
+            color: var(--rblx-light-blue);
+            text-decoration: none
+        }
+
+        .nav-brand span {
+            color: var(--rblx-yellow)
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            align-items: center
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: .85rem;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            transition: color .2s
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--rblx-light-blue)
+        }
+
+        .nav-play {
+            background: var(--rblx-green);
+            color: #fff !important;
+            padding: 7px 18px;
+            border-radius: 8px;
+            font-weight: 800 !important;
+            box-shadow: 0 4px 0 #007a2e
+        }
+
+        .nav-play:hover {
+            transform: translateY(-2px)
+        }
+
+        .page-hero {
+            padding: 120px 2rem 60px;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, #0a0e1a 0%, #0d1b3e 60%, #0d1020 100%);
+            overflow: hidden
+        }
+
+        .page-hero-glow {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 350px;
+            background: radial-gradient(ellipse, rgba(124, 77, 255, .12) 0%, transparent 70%);
+            pointer-events: none
+        }
+
+        .page-hero h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(2.4rem, 7vw, 5rem);
+            color: #fff;
+            margin-bottom: .8rem;
+            line-height: 1
+        }
+
+        .page-hero h1 span {
+            color: var(--rblx-purple)
+        }
+
+        .page-hero p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 600;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.6
+        }
+
+        .glow-div {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--rblx-blue), var(--rblx-light-blue), var(--rblx-blue), transparent);
+            opacity: .35
+        }
+
+        .uc-section {
+            padding: 80px 2rem;
+            position: relative;
+            z-index: 2;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .uc-card {
+            max-width: 700px;
+            width: 100%;
+            background: var(--rblx-card);
+            border: 2px solid rgba(255, 214, 0, .3);
+            border-radius: 28px;
+            padding: 56px 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .4)
+        }
+
+        .uc-bg-stripe {
+            position: absolute;
+            inset: 0;
+            pointer-events: none
+        }
+
+        .uc-icon {
+            font-size: 5rem;
+            display: block;
+            margin-bottom: 1.5rem;
+            animation: coneBob 2.2s ease-in-out infinite
+        }
+
+        @keyframes coneBob {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-3deg)
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(3deg)
+            }
+        }
+
+        .uc-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--rblx-yellow);
+            margin-bottom: .8rem;
+            line-height: 1.1
+        }
+
+        .uc-sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .uc-badge {
+            display: inline-block;
+            background: rgba(255, 214, 0, .1);
+            border: 1px solid rgba(255, 214, 0, .3);
+            border-radius: 99px;
+            padding: 6px 18px;
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--rblx-yellow);
+            margin-bottom: 2rem;
+            animation: badgePulse 2s ease-in-out infinite
+        }
+
+        
+
+        .uc-progress {
+            background: rgba(255, 255, 255, .06);
+            border-radius: 99px;
+            height: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            position: relative
+        }
+
+        .uc-progress-bar {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--rblx-yellow), var(--rblx-orange));
+            width: 0%;
+            animation: fillBar 3s ease-out forwards;
+            animation-delay: .5s
+        }
+
+        @keyframes fillBar {
+            to {
+                width: 28%
+            }
+        }
+
+        .uc-progress-label {
+            font-size: .78rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            letter-spacing: .5px;
+            margin-bottom: 2.5rem;
+            text-align: left
+        }
+
+        .uc-coming-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            text-align: left
+        }
+
+        .coming-item {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--rblx-border);
+            border-radius: 14px;
+            padding: 1rem;
+            transition: border-color .2s
+        }
+
+        .coming-item:hover {
+            border-color: rgba(255, 214, 0, .3)
+        }
+
+        .coming-item .ci-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: .5rem
+        }
+
+        .coming-item .ci-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: .95rem;
+            color: #fff;
+            display: block;
+            margin-bottom: .25rem
+        }
+
+        .coming-item .ci-sub {
+            font-size: .73rem;
+            color: var(--text-muted);
+            font-weight: 600
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, .08);
+            color: var(--text-main);
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            padding: 12px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, .2);
+            transition: background .2s, border-color .2s, transform .12s, color .2s
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, .13);
+            border-color: var(--rblx-light-blue);
+            transform: translateY(-2px);
+            color: var(--rblx-light-blue)
+        }
+
+        footer {
+            background: #07090f;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            padding: 3rem 2rem 2rem
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem
+        }
+
+        .footer-brand {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            color: var(--rblx-light-blue);
+            margin-bottom: .5rem
+        }
+
+        .footer-brand span {
+            color: var(--rblx-yellow)
+        }
+
+        .footer-tagline {
+            color: var(--text-muted);
+            font-size: .85rem;
+            font-weight: 600;
+            max-width: 230px;
+            line-height: 1.5
+        }
+
+        .footer-col h5 {
+            font-size: .73rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            color: var(--text-muted);
+            margin-bottom: .9rem
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .55rem
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: #6b7db3;
+            font-weight: 700;
+            font-size: .88rem;
+            transition: color .2s
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--rblx-light-blue)
+        }
+
+        .footer-div {
+            height: 1px;
+            background: rgba(255, 255, 255, .05);
+            margin-bottom: 2rem
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem
+        }
+
+        .footer-copy {
+            color: #3d4466;
+            font-size: .8rem;
+            font-weight: 600
+        }
+
+        .made-by {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1rem;
+            color: var(--rblx-light-blue)
+        }
+
+        .made-by span {
+            color: var(--rblx-yellow)
+        }
+
+        .rblx-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: .76rem;
+            font-weight: 800;
+            color: #6b7db3;
+            text-decoration: none;
+            transition: border-color .2s, color .2s
+        }
+
+        .rblx-badge:hover {
+            border-color: var(--rblx-green);
+            color: var(--rblx-green)
+        }
+
+        @media(max-width:768px) {
+            nav .nav-links li:not(:last-child) {
+                display: none
+            }
+
+            .uc-card {
+                padding: 36px 22px
+            }
+
+            .footer-top {
+                flex-direction: column
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise"></div>
+    <nav>
+        <a class="nav-brand" href="index.html">Swim for <span>Brainrots!</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="codes.html">Codes</a></li>
+            <li><a href="wiki.html" class="active">Wiki</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank"
+                    class="nav-play">▶ Play Now</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-hero">
+        <div class="page-hero-glow"></div>
+        <h1>The <span>Wiki</span></h1>
+        <p>Your complete guide to everything in Swim for Brainrots — companions, worlds, mechanics, and more.</p>
+    </div>
+    <div class="glow-div"></div>
+
+    <section class="uc-section">
+        <div class="uc-card">
+            <div class="uc-bg-stripe"></div>
+            <div class="uc-badge"> Under Construction</div>
+            <h2 class="uc-title">Wiki Coming Soon!</h2>
+            <p class="uc-sub">We're building the most complete guide to Swim for Brainrots out there. Pets, worlds,
+                rebirth mechanics, egg tables, tips — everything. It'll be worth the wait.</p>
+            <div class="uc-progress">
+                <div class="uc-progress-bar"></div>
+            </div>
+            <p class="uc-progress-label">28% complete — working hard 🔧</p>
+
+            <div class="uc-coming-grid">
+                <div class="coming-item">
+                    <span class="ci-icon"></span>
+                    <span class="ci-title">Guides</span>
+                    <span class="ci-sub">Drop rates, brainrot tiers, which to hatch first</span>
+                </div>
+                <div class="coming-item">
+                    <span class="ci-icon"></span>
+                    <span class="ci-title">BRAINROT WIKI</span>
+                    <span class="ci-sub">You will see every brainrot with effects and stats</span>
+                </div>
+                <div class="coming-item">
+                    <span class="ci-icon"></span>
+                    <span class="ci-title">World Maps</span>
+                    <span class="ci-sub">Every server unlocked and what's in them</span>
+                </div>
+                <div class="coming-item">
+                    <span class="ci-icon"></span>
+                    <span class="ci-title">Tips</span>
+                    <span class="ci-sub">Track strategies and speed shortcuts</span>
+                </div>
+                <div class="coming-item">
+                    <span class="ci-icon"></span>
+                    <span class="ci-title">Companion List</span>
+                    <span class="ci-sub">Full game guide list with stats and rarity tiers</span>
+                </div>
+                <div class="coming-item">
+                    <span class="ci-icon"></span>
+                    <span class="ci-title">Items</span>
+                    <span class="ci-sub">What each item does and when to use it</span>
+                </div>
+            </div>
+
+            <div style="margin-top:2.5rem">
+                <a href="index.html" class="btn-secondary">← Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-brand">Swim for <span>Brainrots!</span></div>
+                    <p class="footer-tagline">The wildest swimming game on Roblox. Dive deep. Hatch everything.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Pages</h5>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="codes.html">Codes</a></li>
+                        <li><a href="wiki.html">Wiki</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots"
+                                target="_blank">Roblox Page</a></li>
+                        <li><a href="https://muaves.com" target="_blank">muaves.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-div"></div>
+            <div class="footer-bottom">
+                <span class="footer-copy">© 2025 Swim for Brainrots. Not affiliated with Roblox Corporation.</span>
+                <span class="made-by">Page made by <span>Muaves</span> 🌊</span>
+                <a href="https://www.roblox.com/games/75183743467288/Swim-for-Brainrots" target="_blank"
+                    class="rblx-badge">▶ Play Free on Roblox</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
